@@ -56,3 +56,12 @@ html.rm .space-static{background-image:url(/bg/hero-static.webp)}
 @keyframes shoot{0%{opacity:0;transform:translate3d(var(--x0),var(--y0),0) rotate(-28deg)}1%{opacity:1}6%{opacity:0;transform:translate3d(calc(var(--x0) - 420px),calc(var(--y0) + 223px),0) rotate(-28deg)}100%{opacity:0;transform:translate3d(calc(var(--x0) - 420px),calc(var(--y0) + 223px),0) rotate(-28deg)}}
 @media (prefers-reduced-motion:reduce){.sky i,.shoot{animation:none!important}.shoot{display:none}}
 @media (pointer:coarse){.sky .s1{animation-duration:120s}.shoot.b{display:none}}
+
+/* surfaces */
+.band{background:linear-gradient(180deg,rgba(5,6,12,.55),rgba(5,6,12,.72))}
+.panel{position:relative;border-radius:1.5rem;background:linear-gradient(180deg,rgba(20,22,44,.86),rgba(11,12,26,.9));border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(157,140,255,.04),0 30px 60px -30px rgba(0,0,0,.7);transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .3s}
+@media (pointer:fine){.panel{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}}
+.panel-hover:hover{transform:translateY(-4px);border-color:rgba(255,177,105,.28)}
+.panel::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(60% 50% at 0% 0%,rgba(255,177,105,.06),transparent 70%)}
+.chip{border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);padding:.375rem .875rem;font-size:.875rem;color:#a9a6b8}
+@media (prefers-reduced-motion:reduce){.panel-hover:hover{transform:none}}

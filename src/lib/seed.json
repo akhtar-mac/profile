@@ -2,7 +2,7 @@
  "content": {
   "seo": {
    "title": "Akhtar Shaikh — Frontend & AI Automation Developer",
-   "description": "React and React Native developer building full-stack products and local-LLM automation. Based in India, open to remote roles and freelance work.",
+   "description": "Full Stack & AI Automation Engineer building React / React Native products and local-LLM automation. Based in India, open to remote roles and freelance work.",
    "og_image": "/og.png"
   },
   "hero": {
@@ -10,24 +10,24 @@
    "last": "Shaikh",
    "badge": "Available for remote roles & freelance",
    "title": "Frontend & AI Automation Developer",
-   "pitch": "I ship React and React Native products end to end — Node APIs, Docker, AWS — and build local-LLM agents that take repetitive work off people's plates.",
+   "pitch": "I ship React and React Native products end to end — Node and Express APIs, MongoDB, Docker, AWS — and build automation and local-LLM agents that take repetitive work off people's plates.",
    "meta": "Chh. Sambhajinagar, India · Building since 2019",
    "cta_primary": "Selected work",
    "cta_secondary": "Résumé"
   },
   "about": {
    "kicker": "About",
-   "text": "I've shipped web and mobile products since 2019 — freelance first, then React Native at Subtle Solution, and since 2021 full stack at Just Logic Software. I care about clean frontend architecture, dependable API integrations and reproducible Docker deployments. After hours, I build offline AI workspaces and multi-agent systems on Ollama, OpenRouter and Hermes.",
+   "text": "I've shipped web and mobile products since 2019 — freelance first, then React Native at Subtle Solution, five years full stack at Just Logic Software, and now Full Stack & AI Automation Engineer at Etax Wala Solutions, where I built the company's LMS platform and website ecosystem. After hours, I build offline AI workspaces and multi-agent systems on Ollama, OpenRouter and Hermes.",
    "photo_url": "/portrait/portrait@2x.webp",
    "photo_alt": "Portrait of Akhtar Shaikh",
    "facts": [
     {
      "k": "Role",
-     "v": "Full Stack Developer, Just Logic Software"
+     "v": "Full Stack & AI Automation Engineer, Etax Wala Solutions"
     },
     {
      "k": "Focus",
-     "v": "React · React Native · AI automation"
+     "v": "React · React Native · Node · AI automation"
     },
     {
      "k": "Base",
@@ -57,6 +57,7 @@
     "TypeScript",
     "JavaScript",
     "Node.js",
+    "Express",
     "MongoDB",
     "MERN",
     "Tailwind",
@@ -100,6 +101,7 @@
     "group": "Backend & APIs",
     "items": [
      "Node.js",
+     "Express",
      "FastAPI / Flask (basics)",
      "RESTful APIs",
      "MongoDB",
@@ -132,26 +134,27 @@
   ],
   "experience": [
    {
-    "role": "Full Stack Developer",
-    "org": "Just Logic Software Pvt Ltd",
+    "role": "Full Stack & AI Automation Engineer",
+    "org": "Etax Wala Solutions Pvt Ltd",
     "where": "Chh. Sambhajinagar, MH",
-    "when": "Jun 2021 — Present",
+    "when": "Jul 2026 — Present",
     "points": [
-     "Build and maintain web and cross-platform mobile apps on React, React Native and MERN.",
-     "Own frontend architecture, API integrations and performance work.",
-     "Containerise services with Docker and help deploy them to AWS EC2.",
-     "Wire backend integrations and automation workflows for business clients."
+     "Delivered a complete LMS: student mobile app, admin dashboards, course management, assessments, payments, progress tracking and role-based workflows.",
+     "Built and launched the company's website ecosystem — responsive sites, management dashboards, enquiry/admission systems, invoices, ID cards and other business modules.",
+     "Develop cross-platform web and mobile apps on React, React Native, Node.js, Express and MongoDB with end-to-end API integrations.",
+     "Run cloud deployment, Docker environments, automation workflows and third-party integrations for production business apps."
     ]
    },
    {
-    "role": "Freelance Developer",
-    "org": "Self-employed",
-    "where": "Remote",
-    "when": "Jun 2019 — Present",
+    "role": "Full Stack Developer",
+    "org": "Just Logic Software Pvt Ltd",
+    "where": "Chh. Sambhajinagar, MH",
+    "when": "Jun 2021 — Jul 2026",
     "points": [
-     "Deliver React and React Native frontends with backend integrations for clients.",
-     "Automate client workflows with third-party APIs and foundational CI/CD pipelines.",
-     "Deploy on AWS, Docker and VPS; prototype LLM-driven automation tools."
+     "Built and maintained web and cross-platform mobile apps on React, React Native and MERN.",
+     "Owned frontend architecture, API integrations and performance work.",
+     "Containerised services with Docker and helped deploy them to AWS EC2.",
+     "Wired backend integrations and automation workflows for business clients."
     ]
    },
    {
@@ -163,6 +166,17 @@
      "Built cross-platform mobile apps in React Native with a focus on performance and UX.",
      "Turned business requirements into maintainable, component-based React interfaces.",
      "Shipped features and fixed production issues alongside cross-functional teams."
+    ]
+   },
+   {
+    "role": "Freelance Developer",
+    "org": "Self-employed",
+    "where": "Remote, alongside employment",
+    "when": "Jun 2019 — Present",
+    "points": [
+     "Deliver React and React Native frontends with backend integrations for clients.",
+     "Automate client workflows with third-party APIs and foundational CI/CD pipelines.",
+     "Deploy on AWS, Docker and VPS; prototype LLM-driven automation tools."
     ]
    }
   ],
@@ -253,7 +267,7 @@
     "JavaScript"
    ],
    "sort_order": 3,
-   "featured": true
+   "featured": false
   },
   {
    "title": "multifly-admin",
@@ -266,7 +280,7 @@
     "JavaScript"
    ],
    "sort_order": 4,
-   "featured": true
+   "featured": false
   },
   {
    "title": "multifly-backend",
@@ -279,7 +293,7 @@
     "JavaScript"
    ],
    "sort_order": 5,
-   "featured": true
+   "featured": false
   },
   {
    "title": "perfume-web",
@@ -292,7 +306,7 @@
     "TypeScript"
    ],
    "sort_order": 6,
-   "featured": true
+   "featured": false
   },
   {
    "title": "perfume-lumen",
@@ -305,7 +319,7 @@
     "TypeScript"
    ],
    "sort_order": 7,
-   "featured": true
+   "featured": false
   },
   {
    "title": "LymLyn",
@@ -318,7 +332,7 @@
     "JavaScript"
    ],
    "sort_order": 8,
-   "featured": true
+   "featured": false
   }
  ]
 }

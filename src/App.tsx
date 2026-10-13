@@ -20,10 +20,12 @@ const Eyebrow = ({ n, t, dark }: { n: string; t: string; dark?: boolean }) => (
 
 function Section({ id, n, k, title, children, bg }: { id: string; n: string; k: string; title: string; children: ReactNode; bg: number }) {
   return (
-    <section id={id} data-bg={bg} aria-labelledby={id + '-h'} className="px-5 py-28 sm:px-10 sm:py-36">
-      <Eyebrow n={n} t={k} />
-      <h2 id={id + '-h'} className="split mb-16 font-display text-d1 font-extrabold"><Split text={title} /></h2>
-      {children}
+    <section id={id} data-bg={bg} aria-labelledby={id + '-h'} className="band px-5 py-24 sm:px-10 sm:py-32">
+      <div className="mx-auto max-w-7xl">
+        <Eyebrow n={n} t={k} />
+        <h2 id={id + '-h'} className="split mb-12 font-display text-d1 font-extrabold sm:mb-16"><Split text={title} /></h2>
+        {children}
+      </div>
     </section>
   )
 }
@@ -110,31 +112,31 @@ export default function App({ data }: { data: SiteData }) {
           <p className="hero-fade eyebrow relative mt-8 text-subtle">{hero.meta}</p>
         </section>
 
-        <div className="overflow-hidden border-y border-white/10 bg-void/40 py-7" aria-label="Technologies">
+        <div className="overflow-hidden border-y border-white/10 bg-void/80 py-7" aria-label="Technologies">
           <ul className="marquee font-display text-[clamp(2.5rem,6vw,5rem)] font-extrabold tracking-[-.02em]">{[...marquee.primary, ...marquee.primary].map((t, i) => <li key={i} className="flex items-center whitespace-nowrap px-6" aria-hidden={i >= marquee.primary.length}>{i % 2 ? <span className="stroke">{t}</span> : t}<span className="ml-12 text-[.5em] text-accent">✦</span></li>)}</ul>
           <ul className="marquee rev eyebrow mt-4 text-subtle" aria-hidden>{[...marquee.secondary, ...marquee.secondary].map((t, i) => <li key={i} className="whitespace-nowrap px-5">{t}<span className="ml-10 text-white/20">/</span></li>)}</ul>
         </div>
 
-        <section id="about" data-bg={1} aria-labelledby="about-h" className="px-5 py-28 sm:px-10 sm:py-40">
+        <section id="about" data-bg={1} aria-labelledby="about-h" className="band px-5 py-24 sm:px-10 sm:py-32"><div className="mx-auto max-w-7xl">
           <Eyebrow n="01" t={S.eyebrow_about || about.kicker} />
           <h2 id="about-h" className="sr-only">{about.kicker}</h2>
-          <div>
-            <div>
+          <div className="panel p-7 sm:p-12">
+            <div className="relative">
               <p className="about-words relative max-w-[38ch] font-display text-about font-bold">
                 <span className="text-subtle">{about.text}</span>
                 <span aria-hidden className="absolute inset-0 text-bone">{about.text.split(' ').map((w, i) => <span key={i} className="w opacity-0">{w} </span>)}</span>
               </p>
-              {about.facts && <dl className="mt-12 grid gap-6 border-t border-white/10 pt-8 sm:grid-cols-3">{about.facts.map(f => <div key={f.k} data-reveal><dt className="eyebrow text-subtle">{f.k}</dt><dd className="mt-2 text-bone">{f.v}</dd></div>)}</dl>}
+              {about.facts && <dl className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-3">{about.facts.map(f => <div key={f.k} data-reveal className="rounded-2xl border border-white/10 bg-white/[.03] p-5"><dt className="eyebrow text-subtle">{f.k}</dt><dd className="mt-3 leading-snug text-bone">{f.v}</dd></div>)}</dl>}
             </div>
           </div>
-        </section>
+        </div></section>
 
         <Section id="skills" bg={2} n="02" k={S.eyebrow_skills || 'Capabilities'} title={S.skills}>
-          <div className="grid border-t border-white/10 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2">
             {skills.map(({ group, items }, i) => (
-              <div key={group} data-reveal className={'border-b border-white/10 py-9 md:px-9 ' + (i % 2 ? 'md:border-l' : 'md:pl-0')}>
+              <div key={group} data-reveal className="panel panel-hover p-7 sm:p-9">
                 <h3 className="flex items-baseline justify-between font-display text-d2 font-bold"><span>{group}</span><span className="eyebrow text-subtle">0{i + 1}</span></h3>
-                <ul className="mt-6 flex flex-wrap gap-2">{items.map(t => <li key={t} className="rounded-full border border-white/12 bg-white/[.02] px-3.5 py-1.5 text-sm text-muted">{t}</li>)}</ul>
+                <ul className="mt-6 flex flex-wrap gap-2">{items.map(t => <li key={t} className="chip">{t}</li>)}</ul>
               </div>
             ))}
           </div>
@@ -144,10 +146,10 @@ export default function App({ data }: { data: SiteData }) {
           <ol className="tl relative">
             <span className="tl-line absolute left-0 top-0 h-full w-px bg-gradient-to-b from-accent via-accent2 to-transparent md:left-[calc(33.333%-1px)]" aria-hidden />
             {experience.map(j => (
-              <li key={j.role + j.when} data-reveal className="relative grid gap-4 pb-20 pl-8 last:pb-0 md:grid-cols-3 md:pl-0">
-                <span className="absolute left-[-4px] top-2 h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_#ffb169] md:left-[calc(33.333%-5px)]" aria-hidden />
-                <div className="md:pr-12 md:text-right"><p className="eyebrow text-bone">{j.when}</p><p className="mt-2 text-sm text-subtle">{j.where}</p></div>
-                <div className="md:col-span-2 md:pl-12">
+              <li key={j.role + j.when} data-reveal className="relative grid gap-4 pb-8 pl-8 last:pb-0 md:grid-cols-3 md:gap-0 md:pl-0">
+                <span className="absolute left-[-4px] top-2 h-2 w-2 rounded-full md:top-10 bg-accent shadow-[0_0_12px_#ffb169] md:left-[calc(33.333%-5px)]" aria-hidden />
+                <div className="md:pr-12 md:pt-8 md:text-right"><p className="eyebrow text-bone">{j.when}</p><p className="mt-2 text-sm text-subtle">{j.where}</p></div>
+                <div className="panel panel-hover p-6 sm:p-8 md:col-span-2 md:ml-12">
                   <h3 className="font-display text-d2 font-bold">{j.role}</h3>
                   <p className="mt-2 text-accent2">{j.org}</p>
                   <ul className="measure mt-6 space-y-2.5 text-muted">{j.points.filter(Boolean).map(p => <li key={p} className="flex gap-3"><span aria-hidden className="text-subtle">—</span>{p}</li>)}</ul>
@@ -157,21 +159,22 @@ export default function App({ data }: { data: SiteData }) {
           </ol>
         </Section>
 
-        <section id="work" data-bg={0} aria-labelledby="work-h" className="h-wrap overflow-hidden lg:flex lg:h-screen lg:items-center">
-          <div className="h-track flex flex-col gap-6 px-5 py-28 sm:px-10 lg:flex-row lg:items-center lg:gap-10 lg:py-0 lg:pr-10">
+        <section id="work" data-bg={0} aria-labelledby="work-h" className={"band h-wrap overflow-hidden" + (builds.length > 1 ? " lg:flex lg:h-screen lg:items-center" : "")}>
+          <div className={"flex flex-col gap-6 px-5 py-24 sm:px-10 lg:flex-row lg:items-center lg:gap-10 lg:pr-10" + (builds.length > 1 ? " h-track lg:py-0" : " mx-auto max-w-7xl")}>
             <div className="shrink-0 lg:w-[32vw]">
               <Eyebrow n="04" t={S.eyebrow_work || 'Projects'} />
               <h2 id="work-h" className="split font-display text-d1 font-extrabold"><Split text={S.work} /></h2>
-              <p data-reveal className="mt-6 max-w-xs text-muted">{S.work_sub}</p>
+              <p data-reveal className="mt-6 max-w-xs text-muted">{builds.length ? S.work_sub : ''}</p>
             </div>
+            {!builds.length && <div data-reveal className="panel flex min-h-[16rem] flex-1 flex-col justify-center p-8 sm:p-12"><p className="eyebrow text-accent">{S.eyebrow_work || 'Projects'}</p><p className="mt-4 max-w-md font-display text-d2 font-bold">{S.work_sub}</p><a href={'mailto:' + contact.email} className="mt-6 w-fit rounded-full bg-bone px-6 py-3 text-sm font-medium text-ink">{contact.email}</a></div>}
             {builds.map((b, bi) => (
-              <article key={b.id ?? b.title} data-reveal className="group relative shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-deep/80 lg:h-[72vh] lg:w-[44vw]">
+              <article key={b.id ?? b.title} data-reveal className="panel panel-hover group relative shrink-0 overflow-hidden lg:h-[72vh] lg:w-[44vw]">
                 <div className="relative h-64 overflow-hidden sm:h-80 lg:h-[54%]"><Cover hue={b.hue} title={b.title} tech={b.tech} cover={b.cover_url} type={b.cover_type} /></div>
                 <div className="p-6 sm:p-8">
                   <p className="eyebrow flex justify-between text-subtle"><span>{b.tag}</span><span>{String(bi + 1).padStart(2, '0')}</span></p>
                   <h3 className="mt-4 font-display text-d2 font-bold">{b.title}</h3>
                   <p className="measure mt-3 text-[.95rem] leading-relaxed text-muted">{b.description}</p>
-                  <ul className="mt-5 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-subtle">{b.tech.map(t => <li key={t}>{t}</li>)}</ul>
+                  <ul className="mt-5 flex flex-wrap gap-2">{b.tech.map(t => <li key={t} className="chip !px-2.5 !py-1 font-mono !text-[11px]">{t}</li>)}</ul>
                   {(b.live_url || b.repo_url) && <p className="mt-5 flex gap-5 text-sm">{b.live_url && <a href={b.live_url} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">Live ↗</a>}{b.repo_url && <a href={b.repo_url} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">Code ↗</a>}</p>}
                 </div>
               </article>
@@ -179,10 +182,10 @@ export default function App({ data }: { data: SiteData }) {
           </div>
         </section>
 
-        <section data-bg={2} aria-labelledby="gh-h" className="px-5 py-28 sm:px-10 sm:py-36">
+        {repos.length > 0 && <section data-bg={2} aria-labelledby="gh-h" className="band px-5 py-24 sm:px-10 sm:py-32"><div className="mx-auto max-w-7xl">
           <Eyebrow n="05" t={S.eyebrow_repos || 'GitHub'} />
           <h2 id="gh-h" className="split mb-14 font-display text-d1 font-extrabold"><Split text={S.repos} /></h2>
-          <ul className="repo-list border-t border-white/10">
+          <ul className="repo-list panel overflow-hidden px-6 sm:px-8">
             {repos.map((r, i) => (
               <li key={r.id ?? r.title} data-hue={r.hue} data-name={r.title}>
                 <a href={r.live_url || r.repo_url || '#'} target="_blank" rel="noopener noreferrer" data-cursor="Open" className="group flex items-center gap-6 border-b border-white/10 py-6 sm:py-8">
@@ -195,25 +198,33 @@ export default function App({ data }: { data: SiteData }) {
               </li>
             ))}
           </ul>
-        </section>
+        </div></section>}
       </main>
 
       <footer id="contact" aria-labelledby="contact-h" className="relative overflow-hidden rounded-t-[2.5rem] bg-bone px-5 pb-8 pt-24 text-ink sm:px-10 sm:pt-32">
         <div aria-hidden className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,rgba(255,177,105,.45),transparent)]" />
-        <Eyebrow n="06" t={S.eyebrow_contact || 'Contact'} dark />
-        <h2 id="contact-h" className="split relative font-display text-[clamp(3.2rem,12vw,12rem)] font-extrabold leading-[.84] tracking-[-.04em]"><Split text={S.contact} /></h2>
-        {S.contact_sub && <p data-reveal className="measure mt-8 text-lead text-zinc-700">{S.contact_sub}</p>}
-        <div className="relative mt-12 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-          <div>
-            <a href={'mailto:' + contact.email} data-magnetic data-cursor="Write" className="inline-block break-all rounded-full bg-ink px-7 py-5 text-base font-medium text-bone sm:text-xl">{contact.email}</a>
-            <p className="mt-4 text-zinc-700"><a href={tel} className="hover:text-ink">{contact.phone}</a> · {contact.location}</p>
+        <div className="relative mx-auto max-w-7xl">
+          <Eyebrow n="06" t={S.eyebrow_contact || 'Contact'} dark />
+          <h2 id="contact-h" className="split font-display text-[clamp(3.2rem,11vw,11rem)] font-extrabold leading-[.84] tracking-[-.04em]"><Split text={S.contact} /></h2>
+          {S.contact_sub && <p data-reveal className="measure mt-8 text-lead text-zinc-700">{S.contact_sub}</p>}
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            <a href={'mailto:' + contact.email} data-cursor="Write" className="group rounded-3xl bg-ink p-7 text-bone shadow-[0_30px_60px_-30px_rgba(5,6,12,.6)] transition-transform duration-500 hover:-translate-y-1 md:col-span-2">
+              <span className="eyebrow text-accent">Email</span>
+              <span className="mt-4 block break-all font-display text-[clamp(1.4rem,3vw,2.4rem)] font-bold">{contact.email}</span>
+              <span className="mt-6 inline-flex items-center gap-2 text-sm text-muted">Write to me <span aria-hidden className="transition-transform duration-500 group-hover:translate-x-1">→</span></span>
+            </a>
+            <div className="rounded-3xl border border-ink/12 bg-white/60 p-7">
+              <span className="eyebrow text-ember">Direct</span>
+              <a href={tel} className="mt-4 block font-display text-xl font-bold hover:underline">{contact.phone}</a>
+              <p className="mt-2 text-zinc-700">{contact.location}</p>
+            </div>
           </div>
-          <ul className="flex flex-wrap gap-3">
-            {contact.socials.map(({ label, url }) => <li key={label}><a href={url} target="_blank" rel="noopener noreferrer" data-magnetic className="inline-block rounded-full border border-ink/25 px-6 py-3 font-medium">{label} ↗</a></li>)}
-            <li><a href={resume.url} download data-magnetic className="inline-block rounded-full border border-ink/25 px-6 py-3 font-medium">{resume.label} ↓</a></li>
+          <ul className="mt-4 grid gap-4 sm:grid-cols-3">
+            {contact.socials.map(({ label, url }) => <li key={label}><a href={url} target="_blank" rel="noopener noreferrer" data-magnetic className="flex items-center justify-between rounded-2xl border border-ink/15 bg-white/50 px-6 py-5 font-medium transition-colors hover:bg-white">{label}<span aria-hidden>↗</span></a></li>)}
+            <li><a href={resume.url} download data-magnetic className="flex items-center justify-between rounded-2xl border border-ink/15 bg-white/50 px-6 py-5 font-medium transition-colors hover:bg-white">{resume.label}<span aria-hidden>↓</span></a></li>
           </ul>
+          <div className="eyebrow mt-20 flex justify-between border-t border-ink/15 pt-6 text-zinc-700"><span>© {new Date().getFullYear()} {hero.first} {hero.last}</span><a href="#top">Back to top ↑</a></div>
         </div>
-        <div className="eyebrow relative mt-24 flex justify-between border-t border-ink/15 pt-6 text-zinc-700"><span>© {new Date().getFullYear()} {hero.first} {hero.last}</span><a href="#top">Back to top ↑</a></div>
       </footer>
     </>
   )
