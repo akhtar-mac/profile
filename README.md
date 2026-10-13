@@ -41,3 +41,7 @@ The publishable key is safe to expose; all writes are protected by RLS. `public/
 - `scripts/seed.py`, `scripts/copy_v4.py` — content seed / SQL
 - `scripts/gen_images.py` — procedural backgrounds, covers and OG image
 - `scripts/portrait_ai.py` — portrait cleanup, cutout, rim light and web exports
+
+## Deploy
+Live: https://akhtar-portfolio.akhtar-shaikh.workers.dev (Cloudflare Worker).
+`npm run build && node deploy/gen-worker.mjs` bundles `dist/` into `deploy/worker.js` (static files plus an SPA fallback so `/admin` works). Deploy it with `npx wrangler deploy deploy/worker.js --name akhtar-portfolio --compatibility-date 2026-10-01`, or import this repo into Vercel / Cloudflare Pages (build `npm run build`, output `dist`, SPA rewrite `/admin*` → `/index.html`; `vercel.json` already has it).

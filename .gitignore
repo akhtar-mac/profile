@@ -9,3 +9,5 @@ screenshots/*
 !screenshots/v7-desktop-hero.png
 !screenshots/v7-mobile-hero.png
 .DS_Store
+deploy/worker.js
+deploy/cf-deploy.js
