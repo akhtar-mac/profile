@@ -84,7 +84,7 @@ function initCursor() {
   const rx = gsap.quickTo(ring, 'x', { duration: .45, ease: 'power3' }), ry = gsap.quickTo(ring, 'y', { duration: .45, ease: 'power3' })
   addEventListener('pointermove', e => { dx(e.clientX); dy(e.clientY); rx(e.clientX); ry(e.clientY) }, { passive: true })
   document.querySelectorAll<HTMLElement>('a,button').forEach(el => {
-    el.addEventListener('pointerenter', () => { gsap.to(ring, { scale: el.dataset.cursor ? 2.6 : 1.8, duration: .3 }); if (el.dataset.cursor) { label.textContent = el.dataset.cursor; gsap.to(label, { opacity: 1, duration: .2 }) } })
+    el.addEventListener('pointerenter', () => { gsap.to(ring, { scale: el.dataset.cursor ? 2 : 1.4, duration: .3 }); if (el.dataset.cursor) { label.textContent = el.dataset.cursor; gsap.to(label, { opacity: 1, duration: .2 }) } })
     el.addEventListener('pointerleave', () => { gsap.to(ring, { scale: 1, duration: .3 }); gsap.to(label, { opacity: 0, duration: .2 }) })
   })
   // Magnetic

@@ -1,6 +1,14 @@
 import { useEffect, type ReactNode } from 'react'
 import type { SiteData } from './lib/types'
 import Space from './Space'
+import { ICONS } from './lib/icons'
+
+function ToolIcon({ name, size = 18 }: { name: string; size?: number }) {
+  const ic = ICONS[name]
+  const hex = ic && parseInt(ic[1], 16) < 0x333333 ? 'efe9df' : ic?.[1]
+  if (!ic) return <span aria-hidden className="tool-ico grid place-items-center rounded-md border border-white/15 font-mono text-[9px] font-medium" style={{ width: size, height: size }}>{name.replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase()}</span>
+  return <svg aria-hidden viewBox="0 0 24 24" width={size} height={size} className="tool-ico" style={{ ['--brand' as string]: '#' + hex }}><path d={ic[0]} /></svg>
+}
 
 const Split = ({ text }: { text: string }) => (
   <span><span className="sr-only">{text.replace(/\n/g, ' ')}</span>
@@ -68,6 +76,7 @@ function Portrait({ src, alt }: { src?: string; alt: string }) {
 export default function App({ data }: { data: SiteData }) {
   const { hero, about, sections: S, marquee, skills, experience, contact, resume } = data.content
   const builds = data.projects.filter(p => p.kind === 'build'), repos = data.projects.filter(p => p.kind === 'repo')
+  const tools = [...new Set(skills.flatMap(g => g.items))].filter(t => ICONS[t])
   const tel = 'tel:' + contact.phone.replace(/[^+\d]/g, '')
   useEffect(() => { import('./motion').then(m => m.initMotion(matchMedia('(prefers-reduced-motion: reduce)').matches)) }, [])
 
@@ -76,7 +85,7 @@ export default function App({ data }: { data: SiteData }) {
       <div className="sky" aria-hidden><i className="s1" /><i className="s2" /><i className="s3" /><span className="shoot a" style={{ ['--x0' as string]: '85vw', ['--y0' as string]: '12vh' }} /><span className="shoot b" style={{ ['--x0' as string]: '60vw', ['--y0' as string]: '38vh' }} /></div>
       {[0, 1, 2].map(i => <div key={i} className={'bgl bgl-' + i + (i === 0 ? ' on' : '')} aria-hidden />)}
       <div className="grain" aria-hidden />
-      <div id="cur-ring" className="pointer-events-none fixed left-0 top-0 z-[80] grid h-10 w-10 place-items-center rounded-full border border-white/60 opacity-0 mix-blend-difference" aria-hidden><span id="cur-label" className="eyebrow text-[5px] opacity-0" /></div>
+      <div id="cur-ring" className="pointer-events-none fixed left-0 top-0 z-[80] grid h-8 w-8 place-items-center rounded-full border border-white/50 opacity-0 mix-blend-difference" aria-hidden><span id="cur-label" className="eyebrow text-[5px] opacity-0" /></div>
       <div id="cur-dot" className="pointer-events-none fixed left-0 top-0 z-[80] h-1.5 w-1.5 rounded-full bg-white opacity-0 mix-blend-difference" aria-hidden />
       <div id="repo-preview" className="pointer-events-none fixed left-0 top-0 z-[55] hidden h-56 w-80 overflow-hidden rounded-2xl opacity-0 lg:block" style={{ background: 'radial-gradient(100% 100% at 0 0, hsl(var(--h,240) 70% 62% / .75), transparent 60%), radial-gradient(90% 90% at 100% 100%, hsl(calc(var(--h,240) + 40) 70% 55% / .55), transparent 60%), #0a0c18' }} aria-hidden>
         <div className="absolute inset-4 top-8 rounded-t-lg border border-white/20 bg-black/40 p-4 font-mono text-xs text-white/80"><p className="text-white/60">repository</p><span className="mt-1 block text-lg text-white" /></div>
@@ -112,9 +121,13 @@ export default function App({ data }: { data: SiteData }) {
           <p className="hero-fade eyebrow relative mt-8 text-subtle">{hero.meta}</p>
         </section>
 
-        <div className="overflow-hidden border-y border-white/10 bg-void/80 py-7" aria-label="Technologies">
-          <ul className="marquee font-display text-[clamp(2.5rem,6vw,5rem)] font-extrabold tracking-[-.02em]">{[...marquee.primary, ...marquee.primary].map((t, i) => <li key={i} className="flex items-center whitespace-nowrap px-6" aria-hidden={i >= marquee.primary.length}>{i % 2 ? <span className="stroke">{t}</span> : t}<span className="ml-12 text-[.5em] text-accent">✦</span></li>)}</ul>
-          <ul className="marquee rev eyebrow mt-4 text-subtle" aria-hidden>{[...marquee.secondary, ...marquee.secondary].map((t, i) => <li key={i} className="whitespace-nowrap px-5">{t}<span className="ml-10 text-white/20">/</span></li>)}</ul>
+        <div className="border-y border-white/10 bg-void/85 py-8 sm:py-10" aria-label="Technologies">
+          <div className="fade-x overflow-hidden">
+            <ul className="marquee items-center font-display text-[clamp(2.25rem,5.2vw,4.5rem)] font-extrabold leading-none tracking-[-.025em]">{[...marquee.primary, ...marquee.primary].map((t, i) => <li key={i} className="flex items-center whitespace-nowrap" aria-hidden={i >= marquee.primary.length}><span className={'px-[clamp(1rem,2.4vw,2.25rem)] ' + (i % 2 ? 'stroke' : '')}>{t}</span><span aria-hidden className="text-[.38em] text-accent">✦</span></li>)}</ul>
+          </div>
+          <div className="logo-rail fade-x mt-7 overflow-hidden">
+            <ul className="marquee rev logos gap-3 pr-3">{[...tools, ...tools].map((t, i) => <li key={i} aria-hidden={i >= tools.length} className="tool-pill flex shrink-0 items-center gap-2.5 rounded-full border border-white/10 bg-white/[.03] py-2 pl-3 pr-4 text-sm text-muted"><ToolIcon name={t} />{t}</li>)}</ul>
+          </div>
         </div>
 
         <section id="about" data-bg={1} aria-labelledby="about-h" className="band px-5 py-24 sm:px-10 sm:py-32"><div className="mx-auto max-w-7xl">
@@ -132,11 +145,11 @@ export default function App({ data }: { data: SiteData }) {
         </div></section>
 
         <Section id="skills" bg={2} n="02" k={S.eyebrow_skills || 'Capabilities'} title={S.skills}>
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {skills.map(({ group, items }, i) => (
-              <div key={group} data-reveal className="panel panel-hover p-7 sm:p-9">
-                <h3 className="flex items-baseline justify-between font-display text-d2 font-bold"><span>{group}</span><span className="eyebrow text-subtle">0{i + 1}</span></h3>
-                <ul className="mt-6 flex flex-wrap gap-2">{items.map(t => <li key={t} className="chip">{t}</li>)}</ul>
+              <div key={group} data-reveal className="panel panel-hover p-7 sm:p-9 md:last:odd:col-span-2 xl:last:odd:col-span-1 xl:last:col-span-3">
+                <h3 className="flex items-baseline justify-between font-display text-[clamp(1.35rem,2vw,1.75rem)] font-bold tracking-[-.015em]"><span>{group}</span><span className="eyebrow text-subtle">0{i + 1}</span></h3>
+                <ul className="mt-6 flex flex-wrap gap-2">{items.map(t => <li key={t} className="chip tool-pill inline-flex items-center gap-2"><ToolIcon name={t} size={14} />{t}</li>)}</ul>
               </div>
             ))}
           </div>
