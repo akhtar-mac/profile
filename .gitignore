@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+# raw/personal photos and working files (only web-ready exports in public/portrait are committed)
+photos/
+*.psd
+screenshots/*
+!screenshots/v7-desktop-hero.png
+!screenshots/v7-mobile-hero.png
+.DS_Store

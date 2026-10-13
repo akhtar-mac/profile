@@ -1,0 +1,58 @@
+@font-face{font-family:'Cabinet Grotesk';src:url(/fonts/cab-800.woff2) format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:'Cabinet Grotesk';src:url(/fonts/cab-700.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Satoshi';src:url(/fonts/sat-400.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Satoshi';src:url(/fonts/sat-500.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'JetBrains Mono';src:url(/fonts/jbm-500.woff2) format('woff2');font-weight:500;font-display:swap}
+@tailwind base; @tailwind components; @tailwind utilities;
+html{-webkit-font-smoothing:antialiased;background:#05060c;text-rendering:optimizeLegibility}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{background:transparent;color:#efe9df;overflow-x:hidden;font-feature-settings:"ss01","kern"}
+::selection{background:#ffb169;color:#05060c}
+/* section-tinted backdrop layers (opacity crossfades only) */
+.bgl{position:fixed;inset:0;z-index:-1;opacity:0;pointer-events:none;transition:opacity 1.2s ease}
+.bgl.on{opacity:1}
+.bgl-0{background:radial-gradient(60% 50% at 80% 10%,rgba(157,140,255,.16),transparent 70%),radial-gradient(50% 40% at 0% 100%,rgba(40,70,160,.18),transparent 70%)}
+.bgl-1{background:radial-gradient(55% 45% at 10% 20%,rgba(255,177,105,.10),transparent 70%),radial-gradient(60% 50% at 100% 90%,rgba(157,140,255,.12),transparent 70%)}
+.bgl-2{background:radial-gradient(70% 60% at 50% 0%,rgba(60,90,200,.16),transparent 70%),radial-gradient(40% 40% at 90% 80%,rgba(255,177,105,.07),transparent 70%)}
+/* film grain: static noise tile shifted in steps (transform only) */
+.grain{pointer-events:none;position:fixed;inset:-50%;z-index:60;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1.2s steps(6) infinite;will-change:transform}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+.line{display:block;overflow:hidden;padding-bottom:.06em}
+.ch{display:inline-block}
+.marquee{display:flex;width:max-content;animation:mq 42s linear infinite}
+.marquee.rev{animation-direction:reverse}
+@keyframes mq{to{transform:translate3d(-50%,0,0)}}
+.preview{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.group:hover .preview{transform:scale(1.04)}
+.cursor-on,.cursor-on *{cursor:none!important}
+.stroke{-webkit-text-stroke:1px rgba(239,233,223,.4);color:transparent}
+.eyebrow{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase}
+.measure{max-width:62ch}
+/* hero portrait capsule: stadium mask, vertical gradient fill, gradient rim, pulsing glow (opacity-only) */
+.capsule{border-radius:999px;overflow:hidden;isolation:isolate;background:radial-gradient(120% 70% at 50% 110%,#2a2f8f 0%,transparent 60%),linear-gradient(180deg,#3a2f86 0%,#25236a 45%,#121540 100%)}
+.capsule-stars{position:absolute;inset:0;z-index:0;background:url(/bg/stars-s.png) 0 0/320px,url(/bg/stars-m.png) 90px 140px/320px;opacity:.55}
+.capsule-halo{position:absolute;left:50%;top:30%;width:85%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;z-index:1;background:radial-gradient(closest-side,rgba(255,177,105,.38),rgba(157,140,255,.22) 55%,transparent);}
+.capsule::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:3px;background:linear-gradient(160deg,#ffb169,#9d8cff 55%,#5a7dff);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:3;pointer-events:none}
+.capsule::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,transparent 70%,rgba(8,9,24,.35));z-index:2;pointer-events:none}
+.capsule-img{z-index:2;filter:drop-shadow(0 12px 24px rgba(0,0,0,.35))}
+.capsule-glow{position:absolute;inset:0;border-radius:999px;box-shadow:0 0 18px rgba(157,140,255,.8),0 0 40px rgba(110,100,255,.5),0 0 80px rgba(255,177,105,.25);opacity:.55;animation:glow 2.6s ease-in-out infinite alternate;will-change:opacity}
+@keyframes glow{to{opacity:1}}
+html:not(.js) #loader,html.rm #loader{display:none}
+html.rm .space-static{background-image:url(/bg/hero-static.webp)}
+@media (prefers-reduced-motion:reduce){.marquee,.grain,.capsule-glow{animation:none}.preview{transition:none}.bgl{transition:none}}
+
+/* site-wide sky: deep gradient + three drifting star depths (transform), one twinkling layer (opacity), occasional shooting stars */
+.sky{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none;background:radial-gradient(120% 80% at 50% 110%,#17204a 0%,#0b0f24 45%,#05060c 80%)}
+.sky i{position:absolute;inset:0 0 -640px 0;background-repeat:repeat;will-change:transform;animation:drift linear infinite}
+.sky .s1{background-image:url(/bg/stars-s.png);animation-duration:70s;opacity:.8}
+.sky .s2{background-image:url(/bg/stars-m.png);background-position:120px 300px;animation-duration:140s}
+.sky .s3{background-image:url(/bg/stars-l.png);background-position:400px 90px;animation:drift 210s linear infinite,twinkle 4s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(0,-640px,0)}}
+@keyframes twinkle{from{opacity:.55}to{opacity:1}}
+.shoot{position:absolute;top:0;left:0;width:140px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,230,200,.9));border-radius:1px;opacity:0;transform-origin:right center;will-change:transform,opacity}
+.shoot.a{animation:shoot 11s ease-in 3s infinite}
+.shoot.b{animation:shoot 17s ease-in 9s infinite}
+@keyframes shoot{0%{opacity:0;transform:translate3d(var(--x0),var(--y0),0) rotate(-28deg)}1%{opacity:1}6%{opacity:0;transform:translate3d(calc(var(--x0) - 420px),calc(var(--y0) + 223px),0) rotate(-28deg)}100%{opacity:0;transform:translate3d(calc(var(--x0) - 420px),calc(var(--y0) + 223px),0) rotate(-28deg)}}
+@media (prefers-reduced-motion:reduce){.sky i,.shoot{animation:none!important}.shoot{display:none}}
+@media (pointer:coarse){.sky .s1{animation-duration:120s}.shoot.b{display:none}}
